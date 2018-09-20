@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const MenuBar = (props) => {
+class MenuBar extends Component {
 
+  handleClick = (event) => {
+    this.props.onChange(event.target.id)
+  }
   /*
 
-  The 'a' tags below are the menu items. Think about the way a menu 
+  The 'a' tags below are the menu items. Think about the way a menu
   should work. When you click a menu item, the button typically becomes
   'active' to indicate that it is currently selected. How could we achieve
   this programatically? What other behavior do we expect when we click
@@ -12,26 +15,34 @@ const MenuBar = (props) => {
   this component be made aware of what is currently the active menu item?
 
   */
+  render(){
+    console.log(this.props)
 
-  return (
-    <div className="ui four item menu">
-      <a className="item active" id="profile">
-        <i className="user large icon" id="profile"/>
-      </a>
+    let profileActive =  this.props.selectedMenuItem === 'profile' ? 'active' : null
+    let photoActive =  this.props.selectedMenuItem === 'photo' ? 'active' : null
+    let cocktailActive =  this.props.selectedMenuItem === 'cocktail' ? 'active' : null
+    let pokemonActive =  this.props.selectedMenuItem === 'pokemon' ? 'active' : null
 
-      <a className="item" id="photo">
-        <i className="photo large icon" id="photo"/>
-      </a>
+    return (
+      <div className="ui four item menu">
+        <a onClick={this.handleClick} className={`item ${profileActive}`} id="profile">
+          <i className="user large icon" id="profile"/>
+        </a>
 
-      <a className="item" id="cocktail">
-        <i className="cocktail large icon" id="cocktail"/>
-      </a>
+        <a onClick={this.handleClick} className={`item ${photoActive}`} id="photo">
+          <i className="photo large icon" id="photo"/>
+        </a>
 
-      <a className="item" id="pokemon"> 
-        <i className=" themeisle large icon" id="pokemon"/>
-      </a>
-    </div>
-  )
+        <a onClick={this.handleClick} className={`item ${cocktailActive}`} id="cocktail">
+          <i className="cocktail large icon" id="cocktail"/>
+        </a>
+
+        <a onClick={this.handleClick} className={`item ${pokemonActive}`} id="pokemon">
+          <i className=" themeisle large icon" id="pokemon"/>
+        </a>
+      </div>
+    )
+  }
 
 }
 
